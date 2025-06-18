@@ -1,0 +1,9 @@
+[submodule "Backend"]
+	path = Backend
+	url = https://github.com/einToast/MarioKart_Backend
+[submodule "Frontend"]
+	path = Frontend
+	url = https://github.com/einToast/MarioKart_Frontend
+[submodule "Deployment"]
+	path = Deployment
+	url = https://github.com/einToast/MarioKart_Deployment
