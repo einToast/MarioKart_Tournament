@@ -1,9 +1,12 @@
 [submodule "Backend"]
 	path = Backend
 	url = https://github.com/einToast/MarioKart_Backend
+	branch = master
 [submodule "Frontend"]
 	path = Frontend
 	url = https://github.com/einToast/MarioKart_Frontend
+	branch = main
 [submodule "Deployment"]
 	path = Deployment
 	url = https://github.com/einToast/MarioKart_Deployment
+	branch = main
