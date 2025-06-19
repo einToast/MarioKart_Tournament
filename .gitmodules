@@ -10,3 +10,11 @@
 	path = Deployment
 	url = https://github.com/einToast/MarioKart_Deployment
 	branch = main
+[submodule "Schedule"]
+	path = Schedule
+	url = https://github.com/einToast/MarioKart_Schedule
+	branch = main
+[submodule "Evalset"]
+	path = Evalset
+	url = https://github.com/einToast/MarioKart_Evalset
+	branch = main
