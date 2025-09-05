@@ -8,7 +8,7 @@ Full‑stack monorepo for running and managing Mario Kart tournaments. It includ
 - `Frontend/` — Ionic React + Vite (TypeScript). Unit tests in `src/`, Cypress in `cypress/`.
 - `Schedule/` — Python utilities and a small Flask server for match planning.
 - `Deployment/` — `docker-compose.yml` to run the full stack locally or on a host.
-- `Evalset/` — Evaluation assets and docs.
+- `Evalset/` — TODO: Dataset for ML evaluation.
 
 ## Getting Started
 
