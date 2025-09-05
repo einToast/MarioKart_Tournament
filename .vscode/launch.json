@@ -1,0 +1,45 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "MarioKartBackend",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "de.fsr.mariokart_backend.MarioKartBackendApplication",
+            "projectName": "MarioKart_Backend",
+            "args": "",
+            "envFile": "${workspaceFolder}/Backend/.env"
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "MarioKartFrontend",
+            "cwd": "${workspaceFolder}/Frontend",
+            "runtimeExecutable": "ionic",
+            "runtimeArgs": [
+                "serve",
+                "--no-open",
+                "--external",
+            ],
+            "console": "integratedTerminal",
+        },
+        {
+            "name": "MarioKartSchedule",
+            "type": "node",
+            "request": "launch",
+            "runtimeExecutable": "${workspaceFolder}\\Schedule\\.venv\\Scripts\\python.exe",
+            "program": "${workspaceFolder}/Schedule/src/webserver.py",
+            "console": "integratedTerminal",
+        },
+    ],
+    "compounds": [
+        {
+            "name": "MarioKartFullstack",
+            "configurations": [
+                "MarioKartBackend",
+                "MarioKartFrontend",
+                "MarioKartSchedule"
+            ]
+        }
+    ]
+}
