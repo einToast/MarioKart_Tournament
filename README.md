@@ -4,11 +4,11 @@ Full‑stack monorepo for running and managing Mario Kart tournaments. It includ
 
 ## Project Structure
 
-- `Backend/`: Spring Boot (Java 21) API. Config in `src/main/resources/` (`application.properties`, `application-prod.properties`).
-- `Frontend/`: Ionic React + Vite (TypeScript). Unit tests in `src/`, Cypress in `cypress/`.
-- `Schedule/`: Python utilities and a small Flask server for match planning.
-- `Deployment/`: `docker-compose.yml` to run the full stack locally or on a host.
-- `Evalset/`: TODO: Dataset for ML evaluation.
+- `Backend/`: Spring Boot API
+- `Frontend/`: Ionic React + Vite (TypeScript)
+- `Schedule/`: A Flask server for match planning
+- `Deployment/`: `docker-compose.yml` to run the full stack locally or on a host
+- `Evalset/`: TODO: Dataset for ML evaluation
 
 ## Getting Started
 
@@ -29,8 +29,8 @@ docker compose up -d
 Prerequisites:
 
 - Java 21 and Maven
-- Node.js (LTS) and npm
-- Python 3.10+ and `pip`
+- Node.js 24+ and `npm`
+- Python 3.13+ and `pip`
 
 Backend (Spring Boot):
 
@@ -70,7 +70,7 @@ cd Schedule
 python -m venv .venv && source .venv/bin/activate
 pip install -r requirements.txt
 
-# Run the small Flask server
+# Run the Flask server
 python webserver.py
 ```
 
