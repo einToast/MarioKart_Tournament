@@ -21,3 +21,4 @@
 [submodule "OCR"]
 	path = OCR
 	url = https://github.com/einToast/MarioKart_OCR
+	branch = main
