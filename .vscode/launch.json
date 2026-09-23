@@ -11,17 +11,18 @@
             "envFile": "${workspaceFolder}/Backend/.env"
         },
         {
+            "name": "MarioKartFrontend",
             "type": "node",
             "request": "launch",
-            "name": "MarioKartFrontend",
+            
             "cwd": "${workspaceFolder}/Frontend",
             "runtimeExecutable": "ionic",
             "runtimeArgs": [
                 "serve",
                 "--no-open",
-                "--external",
+                "--external"
             ],
-            "console": "integratedTerminal",
+            "console": "integratedTerminal"
         },
         {
             "name": "MarioKartSchedule",
@@ -29,8 +30,72 @@
             "request": "launch",
             "runtimeExecutable": "${workspaceFolder}\\Schedule\\.venv\\Scripts\\python.exe",
             "program": "${workspaceFolder}/Schedule/src/webserver.py",
-            "console": "integratedTerminal",
+            "console": "integratedTerminal"
         },
+        {
+            "name": "MarioKartOCR",
+            "type": "node",
+            "request": "launch",
+            "cwd": "${workspaceFolder}/OCR",
+            "runtimeExecutable": "${workspaceFolder}\\OCR\\.venv\\Scripts\\python.exe",
+            "runtimeArgs": [
+                "-m",
+                "fastapi",
+                "dev",
+                "src/webserver.py",
+                "--port",
+                "8001"
+            ],
+            "console": "integratedTerminal"
+        },
+        {
+            "name": "MarioKartFrontend Devcontainer",
+            "type": "node-terminal",
+            "request": "launch",
+            "cwd": "${workspaceFolder}/Frontend",
+            "command": "npm run ionic_serve -- --external"
+        },
+        {
+            "name": "MarioKartSchedule Devcontainer",
+            "type": "debugpy",
+            "request": "launch",
+            "module": "flask",
+            "cwd": "${workspaceFolder}/Schedule/src",
+            "python": "${workspaceFolder}/Schedule/.venv/bin/python",
+            "args": [
+                "run",
+                "--no-debugger",
+                "--no-reload",
+                "--host",
+                "0.0.0.0",
+                "--port",
+                "8000"
+            ],
+            "env": {
+                "FLASK_APP": "webserver.py",
+                "FLASK_DEBUG": "1",
+                "PYTHONPATH": "${workspaceFolder}/Schedule/src"
+            },
+        },
+        {
+            "name": "MarioKartOCR Devcontainer",
+            "type": "debugpy",
+            "request": "launch",
+            "module": "fastapi",
+            "cwd": "${workspaceFolder}/OCR",
+            "python": "${workspaceFolder}/OCR/.venv/bin/python",
+            "args": [
+                "dev",
+                "src/webserver.py",
+                "--host",
+                "0.0.0.0",
+                "--port",
+                "8001"            
+            ],
+            "env": {
+                "PYTHONPATH": "${workspaceFolder}/OCR/src"
+            },
+        }
     ],
     "compounds": [
         {
@@ -38,8 +103,18 @@
             "configurations": [
                 "MarioKartBackend",
                 "MarioKartFrontend",
-                "MarioKartSchedule"
+                "MarioKartSchedule",
+                "MarioKartOCR"
             ]
-        }
+        },
+        {
+            "name": "MarioKartFullstack Devcontainer",
+            "configurations": [
+                "MarioKartBackend",
+                "MarioKartFrontend Devcontainer",
+                "MarioKartSchedule Devcontainer",
+                "MarioKartOCR Devcontainer"
+            ]
+        },
     ]
 }
