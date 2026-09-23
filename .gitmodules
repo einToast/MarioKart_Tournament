@@ -18,3 +18,7 @@
 	path = Evalset
 	url = https://github.com/einToast/MarioKart_Evalset
 	branch = main
+[submodule "OCR"]
+	path = OCR
+	url = https://github.com/einToast/MarioKart_OCR
+	branch = main

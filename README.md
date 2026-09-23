@@ -6,7 +6,7 @@ Full‑stack monorepo for running and managing Mario Kart tournaments. It includ
 
 - `Backend/`: Spring Boot (Java)
 - `Frontend/`: Ionic React + Vite (TypeScript)
-- `Schedule/`: A Flask server for match planning (Python)
+- `Schedule/`: A Flask server for match scheduling (Python)
 - `Deployment/`: `docker-compose.yml` to run the full stack locally or on a host
 - `Evalset/`: TODO: Dataset for ML evaluation
 
