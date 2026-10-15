@@ -40,7 +40,7 @@
 		}
 
 	},
-	"postCreateCommand": ".devcontainer/postCreateCommand.sh",
+	"postCreateCommand": "bash .devcontainer/postCreateCommand.sh",
 	"customizations": {
 		"vscode": {
 			"extensions": [
@@ -62,8 +62,11 @@
 				"ms-azuretools.vscode-docker",
 				"redhat.vscode-yaml",
 				"mikestead.dotenv",
+				"hashicorp.terraform",
+
 
 				// ...
+				"github.vscode-pull-request",
 				"yzhang.markdown-all-in-one",
 				"vscode-icons-team.vscode-icons"
 			],
@@ -76,7 +79,7 @@
 	},
 	"containerEnv": {
 		"LANG": "C.UTF-8",
-		"LC_ALL": "C.UTF-8",
+		"LC_ALL": "C.UTF-8"
 	},
 	"remoteEnv": {
 		"LANG": "C.UTF-8",
