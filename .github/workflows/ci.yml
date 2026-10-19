@@ -1,0 +1,54 @@
+name: Tournament CI
+
+on:
+  pull_request:
+    branches: [ "main" ]
+  push:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+jobs:
+  backend:
+    name: backend
+    uses: ./.github/workflows/backend.yml
+
+  frontend:
+    name: frontend
+    uses: ./.github/workflows/frontend.yml
+
+  schedule:
+    name: schedule
+    uses: ./.github/workflows/schedule.yml
+
+  ocr:
+    name: ocr
+    uses: ./.github/workflows/ocr.yml
+
+  deployment:
+    name: deployment
+    uses: ./.github/workflows/deployment.yml
+
+  all-tests:
+    name: All tests passed
+    if: always()
+    needs:
+      - backend
+      - frontend
+      - schedule
+      - ocr
+      - deployment
+    runs-on: ubuntu-24.04
+
+    steps:
+    - name: Fail if any sub test did not pass
+      if: contains(needs.*.result, 'failure') || contains(needs.*.result, 'cancelled') || contains(needs.*.result, 'skipped')
+      run: |
+        echo '${{ toJSON(needs) }}'
+        exit 1

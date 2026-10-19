@@ -1,0 +1,98 @@
+name: Deployment Tests
+
+on:
+  workflow_call:
+
+permissions:
+  contents: read
+
+jobs:
+  terraform-validate:
+    name: terraform-validate
+    runs-on: ubuntu-24.04
+
+    defaults:
+      run:
+        working-directory: Deployment/terraform
+
+    steps:
+    - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+    - name: Check out Deployment submodule
+      working-directory: .
+      run: git submodule update --init --depth 1 Deployment
+
+    - name: Set up Terraform
+      uses: hashicorp/setup-terraform@dfe3c3f87815947d99a8997f908cb6525fc44e9e # v4.0.1
+      with:
+        terraform_version: 1.16.2
+
+    - name: Terraform Format Check
+      run: terraform fmt -check
+
+    - name: Terraform Init
+      run: terraform init
+
+    - name: Terraform Validate
+      run: terraform validate
+
+  docker-compose-validate:
+    name: docker-compose-validate
+    runs-on: ubuntu-24.04
+
+    defaults:
+      run:
+        working-directory: Deployment/docker
+
+    steps:
+    - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+    - name: Check out Deployment submodule
+      working-directory: .
+      run: git submodule update --init --depth 1 Deployment
+
+    - name: Docker Compose Config Check
+      run: |
+        output=$(docker compose --env-file .env.test \
+          -f docker-compose.management.yml \
+          -f docker-compose.mariokart.yml \
+          -f docker-compose.nginx.yml \
+          config --quiet 2>&1)
+        echo "$output"
+        if [ -n "$output" ]; then exit 1; fi
+
+  mariokart-stack:
+    name: mariokart-stack (${{ matrix.arch }})
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - arch: amd64
+            runner: ubuntu-24.04
+          - arch: arm64
+            runner: ubuntu-24.04-arm
+    runs-on: ${{ matrix.runner }}
+
+    needs: docker-compose-validate
+
+    defaults:
+      run:
+        working-directory: Deployment/docker
+
+    steps:
+    - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+    - name: Check out Deployment submodule
+      working-directory: .
+      run: git submodule update --init --depth 1 Deployment
+
+    - name: Start MarioKart stack
+      run: docker compose --env-file .env.test -f docker-compose.mariokart.yml up -d --wait --wait-timeout 300
+
+    - name: Show logs on failure
+      if: failure()
+      run: docker compose --env-file .env.test -f docker-compose.mariokart.yml logs
+
+    - name: Tear down
+      if: always()
+      run: docker compose --env-file .env.test -f docker-compose.mariokart.yml down -v
