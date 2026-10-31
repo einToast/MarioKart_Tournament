@@ -44,7 +44,7 @@ jobs:
       - schedule
       - ocr
       - deployment
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
 
     steps:
     - name: Fail if any sub test did not pass
