@@ -8,7 +8,10 @@
             "mainClass": "de.fsr.mariokart_backend.MarioKartBackendApplication",
             "projectName": "MarioKart_Backend",
             "args": "",
-            "envFile": "${workspaceFolder}/Backend/.env"
+            "envFile": "${workspaceFolder}/Backend/.env",
+            "env": {
+                "SEED_EVENT": "${input:seedEvent}"
+            }
         },
         {
             "name": "MarioKartFrontend",
@@ -116,5 +119,18 @@
                 "MarioKartOCR Devcontainer"
             ]
         },
+    ],
+    "inputs": [
+        {
+            "id": "seedEvent",
+            "type": "pickString",
+            "description": "Event from Backend/src/main/resources/seed",
+            "options": [
+                { "label": "none", "value": "" },
+                "demo",
+                "registration"
+            ],
+            "default": ""
+        }
     ]
 }
