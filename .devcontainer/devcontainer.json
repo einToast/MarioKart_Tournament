@@ -6,7 +6,7 @@
 			"version": "25",
 			"installMaven": true
 		},
-		"ghcr.io/devcontainers/features/python:1.8.0": {
+		"ghcr.io/devcontainers/features/python:1.8.1": {
 			"version": "3.14"
 		},
 		"ghcr.io/va-h/devcontainers-features/uv:1.1.4": {},
