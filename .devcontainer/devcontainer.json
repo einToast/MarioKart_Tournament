@@ -10,7 +10,7 @@
 			"version": "3.14"
 		},
 		"ghcr.io/va-h/devcontainers-features/uv:1.1.4": {},
-		"ghcr.io/devcontainers/features/docker-outside-of-docker:1.10.1": {
+		"ghcr.io/devcontainers/features/docker-outside-of-docker:1.10.2": {
 			"version": "latest",
 			"moby": false
     	}
